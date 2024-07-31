@@ -1,0 +1,29 @@
+server:
+  port: 8090
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+        - id: FeeService
+          uri: lb://FeeService
+          predicates:
+            - Path=/Fee/**
+        - id: Transfer
+          uri: lb://Transfer
+          predicates:
+            - Path=Transfer/**
+        - id: Exception
+          uri: lb://Exception
+          predicates:
+            - Path=/Exception/**

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: FeeService
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    url: jdbc:mysql://localhost:3306/fee
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: mysql
+    database-platform : org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+server:
+  port: 8087
+
