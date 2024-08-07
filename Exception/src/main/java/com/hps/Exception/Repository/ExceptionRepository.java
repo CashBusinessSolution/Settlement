@@ -1,4 +1,4 @@
-package com.hps.Exception;
+package com.hps.Exception.Repository;
 
 public class ExceptionRepository {
 }

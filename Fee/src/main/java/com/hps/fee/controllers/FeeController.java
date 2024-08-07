@@ -1,5 +1,7 @@
-package com.hps.fee;
+package com.hps.fee.controllers;
 
+import com.hps.fee.models.Fee;
+import com.hps.fee.services.FeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

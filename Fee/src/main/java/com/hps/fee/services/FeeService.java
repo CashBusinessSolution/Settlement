@@ -1,5 +1,6 @@
-package com.hps.fee;
+package com.hps.fee.services;
 
+import com.hps.fee.models.Fee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class FeeService {
     @Autowired
-    private FeeRepository FeeRepository;
+    private com.hps.fee.repositories.FeeRepository FeeRepository;
 
     public Fee createFees(Fee fee) {
         return FeeRepository.save(fee);

@@ -1,4 +1,4 @@
-package com.hps.fee;
+package com.hps.fee.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
