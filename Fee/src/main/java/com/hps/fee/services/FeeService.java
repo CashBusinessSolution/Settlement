@@ -1,11 +1,9 @@
 package com.hps.fee.services;
 
 import com.hps.fee.models.Fee;
+import com.hps.fee.repositories.FeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,33 +11,42 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class FeeService {
-    @Autowired
-    private com.hps.fee.repositories.FeeRepository FeeRepository;
 
+    // Injection de la dépendance avec @RequiredArgsConstructor
+    private final FeeRepository feeRepository;
+
+    // Création et sauvegarde des frais
     public Fee createFees(Fee fee) {
-        return FeeRepository.save(fee);
+        return feeRepository.save(fee);
     }
 
+    // Récupération de tous les frais
     public List<Fee> getAllFees() {
-        return FeeRepository.findAll();
+        return feeRepository.findAll();
     }
 
+    // Récupération des frais par ID
     public Fee getFeesById(Long id) {
-        return FeeRepository.findById(id).orElse(null);
+        return feeRepository.findById(id).orElse(null);
     }
 
+    // Suppression des frais par ID
     public void deleteFees(Long id) {
-        FeeRepository.deleteById(id);
+        feeRepository.deleteById(id);
     }
 
-
-    public Fee calculateFee(BigDecimal amount, String description) {
+    // Calcul des frais
+    public Fee calculateFee(BigDecimal amount) {
+        // Calcul du montant des frais
         BigDecimal feeAmount = amount.multiply(BigDecimal.valueOf(0.02)); // Exemple de calcul de frais
-        Fee fee = Fee.builder()   // Utilisation de Fee pour la construction
-                .amount(feeAmount)
-                .description(description)
-                .build();
-        return FeeRepository.save(fee);  // Sauvegarde via feeRepository
-    }
 
+        // Création de l'objet Fee
+        Fee fee = Fee.builder()
+                .amount(amount) // Le montant initial
+                .fee(feeAmount) // Le montant des frais calculés
+                .build();
+
+        // Sauvegarde de l'objet Fee et retour de l'objet sauvegardé
+        return feeRepository.save(fee);
+    }
 }

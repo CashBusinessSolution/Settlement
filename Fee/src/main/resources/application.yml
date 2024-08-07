@@ -1,3 +1,6 @@
+server:
+  port: 8087
+
 spring:
   application:
     name: FeeService
@@ -11,8 +14,20 @@ spring:
     hibernate:
       ddl-auto: create
     database: mysql
-    database-platform : org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: mygroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.hps.Transfer.DTOS.TransferDTO
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 eureka:
   instance:
@@ -22,7 +37,3 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
     fetch-registry: true
-
-server:
-  port: 8087
-

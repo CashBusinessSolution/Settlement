@@ -24,4 +24,5 @@ public class Fee {
     private Long id;
     private BigDecimal amount;
     private String description;
+    private BigDecimal fee;
 }

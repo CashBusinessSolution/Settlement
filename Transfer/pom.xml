@@ -10,8 +10,8 @@
     <groupId>com.hps</groupId>
     <artifactId>Transfer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MerchantOnboardingService</name>
-    <description>MerchantOnboardingService</description>
+    <name>TransferService</name>
+    <description>TransferService</description>
     <url/>
     <licenses>
         <license/>
@@ -63,6 +63,20 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

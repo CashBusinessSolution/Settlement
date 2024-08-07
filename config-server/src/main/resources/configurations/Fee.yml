@@ -1,0 +1,30 @@
+server:
+  port: 8087
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+Spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: mygroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          kafka:
+            consumer:
+              value:
+                deserializer:
+                  trusted-packages: "*"
+            listener:
+              error-handler:
+                type: org.springframework.kafka.listener.DefaultErrorHandler
+
