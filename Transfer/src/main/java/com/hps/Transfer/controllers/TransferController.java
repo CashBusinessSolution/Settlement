@@ -1,6 +1,6 @@
 package com.hps.Transfer.controllers;
 
-import com.hps.Transfer.DTOS.TransferDTO;
+import com.hps.DTOS.TransferDTO;
 import com.hps.Transfer.kafkaProducer.TransferJsonProducer;
 
 import lombok.RequiredArgsConstructor;

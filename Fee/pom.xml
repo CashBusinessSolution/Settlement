@@ -77,10 +77,10 @@
         </dependency>
         <dependency>
             <groupId>com.hps</groupId>
-            <artifactId>Transfer</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>commonDTOS</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

@@ -1,6 +1,6 @@
 package com.hps.Transfer.kafkaProducer;
 
-import com.hps.Transfer.DTOS.TransferDTO;
+import com.hps.DTOS.TransferDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
