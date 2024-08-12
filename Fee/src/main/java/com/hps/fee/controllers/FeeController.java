@@ -34,10 +34,7 @@ public class FeeController {
         feeService.deleteFees(id);
     }
 
-    @PostMapping("/calculate")
-    public Fee calculateFee(@RequestParam BigDecimal amount, @RequestParam String description) {
-        // Utilisation du service pour calculer les frais
-        return feeService.calculateFee(amount);
+
     }
-}
+
 

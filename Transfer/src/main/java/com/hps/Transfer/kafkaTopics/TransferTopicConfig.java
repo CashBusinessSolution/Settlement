@@ -8,9 +8,16 @@ import org.springframework.kafka.config.TopicBuilder;
 @Configuration
 public class TransferTopicConfig {
     @Bean
-    public NewTopic TransferTopic(){
+    public NewTopic transactionTopic() {
         return TopicBuilder
-                .name("transfer-stream")
-                .build();
+                .name("transaction-stream")
+             .build();}
+
+    @Bean
+        public NewTopic merchantTopic () {
+            return TopicBuilder.name("merchant-topic")
+                    .build();
+        }
+
+
     }
-}

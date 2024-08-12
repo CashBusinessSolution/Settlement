@@ -1,7 +1,12 @@
 package com.hps.fee.services;
 
+import com.hps.DTOS.MerchantDTO;
+import com.hps.DTOS.TransactionDTO;
+import com.hps.fee.mappers.MerchantMapper;
 import com.hps.fee.models.Fee;
+import com.hps.fee.models.Merchant;
 import com.hps.fee.repositories.FeeRepository;
+import com.hps.fee.repositories.MerchantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +17,34 @@ import java.util.List;
 @Service
 public class FeeService {
 
-    // Injection de la dépendance avec @RequiredArgsConstructor
-    private final FeeRepository feeRepository;
 
-    // Création et sauvegarde des frais
+    private final MerchantRepository merchantRepository;
+    private final FeeRepository feeRepository;
+    private final MerchantMapper merchantMapper;
+
+    public void saveMerchant(MerchantDTO merchantDTO) {
+        Merchant merchant = merchantMapper.toEntity(merchantDTO);
+        merchantRepository.save(merchant);
+    }
+
+    public void processTransaction(TransactionDTO transactionDTO) {
+        Fee fee = new Fee();
+        fee.setTransactionId(transactionDTO.getTransactionId());
+        fee.setAmount(transactionDTO.getAmount());
+        fee.setRecipient(transactionDTO.getRecipient());
+        feeRepository.save(fee);
+    }
+
+    public void processMerchant(MerchantDTO merchantDTO) {
+        Fee fee = new Fee();
+        fee.setMerchantId(merchantDTO.getMerchantId());
+        fee.setSettlementOption(merchantDTO.getSettlementOption());
+        fee.setFeeStructure(merchantDTO.getFeeStructure());
+        fee.setTaxRate(merchantDTO.getTaxRate());
+
+        feeRepository.save(fee);
+
+    }
     public Fee createFees(Fee fee) {
         return feeRepository.save(fee);
     }
@@ -35,15 +64,13 @@ public class FeeService {
         feeRepository.deleteById(id);
     }
 
-    // Calcul des frais
-    public Fee calculateFee(BigDecimal amount) {
-        // Calcul du montant des frais
-        BigDecimal feeAmount = amount.multiply(BigDecimal.valueOf(0.02)); // Exemple de calcul de frais
+    public Fee calculateFee(BigDecimal amount, BigDecimal taxRate) {
+        BigDecimal feeAmount = amount.multiply(taxRate);
 
         // Création de l'objet Fee
         Fee fee = Fee.builder()
-                .amount(amount) // Le montant initial
-                .fee(feeAmount) // Le montant des frais calculés
+                .Amount(amount) // Le montant initial
+                .feeAmount(feeAmount) // Le montant des frais calculés
                 .build();
 
         // Sauvegarde de l'objet Fee et retour de l'objet sauvegardé

@@ -20,9 +20,14 @@ import java.math.BigDecimal;
 @Entity
 public class Fee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Ou une autre stratégie si nécessaire
     private Long id;
-    private BigDecimal amount;
-    private String description;
-    private BigDecimal fee;
+    private BigDecimal feeAmount;
+    private Long MerchantId;
+    private String SettlementOption;
+    private String FeeStructure;
+    private BigDecimal TaxRate;
+    private Long TransactionId;
+    private BigDecimal Amount ;
+    private String recipient;
 }

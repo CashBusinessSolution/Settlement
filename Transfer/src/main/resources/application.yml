@@ -4,8 +4,8 @@ spring:
         key-serializer: org.apache.kafka.common.serialization.StringSerializer
         value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
         properties:
-          spring.json.value.default.type: com.hps.Transfer.DTOS.TransferDTO
-
+          spring.json.value.default.type: com.hps.DTOS.TransactionDTO
+          spring.json.trusted.packages: "*"
   application:
     name: TransferMicroservice
   config:
