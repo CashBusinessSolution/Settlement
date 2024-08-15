@@ -2,6 +2,7 @@ package com.hps.Transfer.kafkaProducer;
 
 import com.hps.DTOS.MerchantDTO;
 import com.hps.DTOS.TransactionDTO;
+import com.hps.DTOS.TransferDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -33,6 +34,14 @@ public class TransferJsonProducer {
                 .setHeader(KafkaHeaders.TOPIC, "merchant-topic")
                 .build();
         log.info("Sending message to 'merchant-topic': {}", message);
+        kafkaTemplate.send(message);
+    }
+    public void sendTransferMessage(TransferDTO transferDTO) {
+        Message<TransferDTO> message = MessageBuilder
+                .withPayload(transferDTO)
+                .setHeader(KafkaHeaders.TOPIC, "Transfer-topic")
+                .build();
+        log.info("Sending message to 'Transfer-topic': {}", message);
         kafkaTemplate.send(message);
     }
 }

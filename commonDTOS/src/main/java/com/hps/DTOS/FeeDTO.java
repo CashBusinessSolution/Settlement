@@ -11,11 +11,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class FeeDTO {
     private BigDecimal feeAmount;
-    private Long MechantId;
-    private String SettlementOption;
-    private String FeeStructure;
-    private BigDecimal TaxRate;
-    private Long TransactionId;
-    private BigDecimal Amount ;
+    private Long merchantId;
+    private String settlementOption;
+    private String feeStructure;
+    private BigDecimal taxRate;
+    private Long transactionId;
+    private BigDecimal amount ;
     private String recipient;
 }

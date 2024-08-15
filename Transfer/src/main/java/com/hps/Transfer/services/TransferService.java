@@ -16,13 +16,5 @@ public class TransferService {
         return transferRepository.save(transfer);
     }
 
-    public Transfer convertToEntity(TransferDTO transferDTO) {
-        Transfer transfer = new Transfer();
-        transfer.setTransferId(transferDTO.getTransferId());
-        transfer.setAmount(transferDTO.getAmount());
-        transfer.setSettlementAccount(transferDTO.getSettlementAccount());
-        transfer.setMerchant(transferDTO.getMerchant());
-        transfer.setDescription(transferDTO.getDescription());
-        return transfer;
-    }
+
 }

@@ -6,6 +6,14 @@ spring:
         properties:
           spring.json.value.default.type: com.hps.DTOS.TransactionDTO
           spring.json.trusted.packages: "*"
+      consumer:
+        bootstrap-servers: localhost:9092
+        group-id: mygroup
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        properties:
+          spring.json.trusted.packages: "*"
+          spring.json.value.default.type: com.hps.DTOS.FeeDTO
   application:
     name: TransferMicroservice
   config:
@@ -16,7 +24,7 @@ spring:
     password: ""
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: mysql
     database-platform : org.hibernate.dialect.MySQL8Dialect
     show-sql: true

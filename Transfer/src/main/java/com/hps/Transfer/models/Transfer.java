@@ -17,18 +17,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transfer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String transferId;
-
-    private BigDecimal amount;
-
-    private String settlementAccount;
-
-    private String merchant;
-
-    private String description;
+    private BigDecimal Amount;
+    private BigDecimal feeAmount;
+    private Long merchantId;
+    private String settlementOption;
+    private String feeStructure;
+    private BigDecimal taxRate;
+    private Long transactionId;
+    private String recipient;
 }

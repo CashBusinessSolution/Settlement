@@ -17,5 +17,6 @@ public class TransactionDTO {
     private Long transactionId;
     private Long merchantId;
     private BigDecimal amount ;
-    private String recipient;
+    public String TypeMessage;
+
 }
