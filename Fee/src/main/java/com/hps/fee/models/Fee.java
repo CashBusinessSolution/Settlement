@@ -29,5 +29,6 @@ public class Fee {
     private BigDecimal TaxRate;
     private Long TransactionId;
     private BigDecimal Amount ;
-    private String recipient;
+    private String bankAccountNumber;
+    private BigDecimal accountBalance;
 }

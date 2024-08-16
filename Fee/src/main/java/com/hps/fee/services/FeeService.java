@@ -76,8 +76,9 @@ public class FeeService {
                         .MerchantId(merchant.getMerchantId())
                         .TransactionId(transactionDTO.getTransactionId())
                         .FeeStructure(merchant.getFeeStructure())
-                        .recipient(merchant.getRecipient())
+                        .bankAccountNumber(merchant.getBankAccountNumber())
                         .SettlementOption(merchant.getSettlementOption())
+                        .accountBalance(merchant.getAccountBalance())
                         .build();
 
                 // Traitement en fonction de la structure des frais
@@ -94,8 +95,9 @@ public class FeeService {
                                 .MerchantId(merchant.getMerchantId())
                                 .TransactionId(transactionDTO.getTransactionId())
                                 .FeeStructure(merchant.getFeeStructure())
-                                .recipient(merchant.getRecipient())
+                                .bankAccountNumber(merchant.getBankAccountNumber())
                                 .SettlementOption(merchant.getSettlementOption())
+                                .accountBalance(merchant.getAccountBalance())
                                 .build();
 
                         // Enregistrement de l'objet Fee détaillé avec le montant réduit
@@ -138,7 +140,8 @@ public class FeeService {
         existingMerchant.setSettlementOption(merchantDTO.getSettlementOption());
         existingMerchant.setFeeStructure(merchantDTO.getFeeStructure());
         existingMerchant.setTaxRate(merchantDTO.getTaxRate());
-        existingMerchant.setRecipient(merchantDTO.getRecipient());
+        existingMerchant.setBankAccountNumber(merchantDTO.getBankAccountNumber());
+        existingMerchant.setAccountBalance(merchantDTO.getAccountBalance());
 
         // Sauvegarder les modifications
         merchantRepository.save(existingMerchant);

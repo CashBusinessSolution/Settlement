@@ -27,5 +27,6 @@ public class Transfer {
     private String feeStructure;
     private BigDecimal taxRate;
     private Long transactionId;
-    private String recipient;
+    private String bankAccountNumber;
+    private BigDecimal accountBalance;
 }

@@ -18,6 +18,7 @@ public class MerchantDTO {
     private String SettlementOption;
     private String FeeStructure;
     private BigDecimal TaxRate;
-    private String recipient;
+    private String bankAccountNumber;
+    private BigDecimal accountBalance;
 
 }

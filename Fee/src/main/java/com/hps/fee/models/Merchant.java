@@ -18,5 +18,6 @@ public class Merchant {
     private String settlementOption;
     private String feeStructure;
     private BigDecimal taxRate;
-    private String recipient;
+    private String bankAccountNumber;
+    private BigDecimal accountBalance;
 }

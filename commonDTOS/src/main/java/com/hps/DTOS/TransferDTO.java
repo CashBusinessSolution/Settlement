@@ -18,5 +18,6 @@ public class TransferDTO {
     private BigDecimal taxRate;
     private Long transactionId;
     private BigDecimal amount ;
-    private String recipient;
+    private String bankAccountNumber;
+    private BigDecimal accountBalance;
 }
