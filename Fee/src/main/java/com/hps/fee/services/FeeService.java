@@ -1,6 +1,7 @@
 package com.hps.fee.services;
 
 import com.hps.DTOS.FeeDTO;
+import com.hps.DTOS.MerchantDTO;
 import com.hps.DTOS.TransactionDTO;
 import com.hps.fee.kafkaProducer.FeeProducer;
 import com.hps.fee.mappers.FeeMapper;
@@ -11,6 +12,7 @@ import com.hps.fee.repositories.FeeRepository;
 import com.hps.fee.repositories.MerchantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -125,4 +127,28 @@ public class FeeService {
         } else {
             log.warn("Amount or merchant ID is null in the transaction message.");
         }
-    }}
+    }
+
+    public void updateMerchant(MerchantDTO merchantDTO) {
+        // Trouver l'enregistrement existant basé sur l'ID
+        Merchant existingMerchant = merchantRepository.findById(merchantDTO.getMerchantId())
+                .orElseThrow(() -> new RuntimeException("Merchant not found with ID: " + merchantDTO.getMerchantId()));
+
+        // Mettre à jour les attributs
+        existingMerchant.setSettlementOption(merchantDTO.getSettlementOption());
+        existingMerchant.setFeeStructure(merchantDTO.getFeeStructure());
+        existingMerchant.setTaxRate(merchantDTO.getTaxRate());
+        existingMerchant.setRecipient(merchantDTO.getRecipient());
+
+        // Sauvegarder les modifications
+        merchantRepository.save(existingMerchant);
+    }
+    public void deleteMerchant(MerchantDTO merchantDTO) {
+        // Trouver l'enregistrement existant basé sur l'ID
+        Merchant existingMerchant = merchantRepository.findById(merchantDTO.getMerchantId())
+                .orElseThrow(() -> new RuntimeException("Merchant not found with ID: " + merchantDTO.getMerchantId()));
+
+        // Supprimer l'enregistrement
+        merchantRepository.delete(existingMerchant);
+    }
+}

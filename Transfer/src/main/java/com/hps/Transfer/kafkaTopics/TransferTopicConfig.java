@@ -19,5 +19,14 @@ public class TransferTopicConfig {
                     .build();
         }
 
-
+    @Bean
+    public NewTopic merchantUpdateTopic () {
+        return TopicBuilder.name("update-merchant")
+                .build();
+    }
+    @Bean
+    public NewTopic merchantDeleteTopic () {
+        return TopicBuilder.name("delete-merchant")
+                .build();
+    }
     }

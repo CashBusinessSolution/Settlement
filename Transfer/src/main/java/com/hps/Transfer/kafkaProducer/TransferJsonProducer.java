@@ -44,4 +44,21 @@ public class TransferJsonProducer {
         log.info("Sending message to 'Transfer-topic': {}", message);
         kafkaTemplate.send(message);
     }
+    public void sendUpdateMerchantMessage(MerchantDTO merchantDTO) {
+        Message<MerchantDTO> message = MessageBuilder
+                .withPayload(merchantDTO)
+                .setHeader(KafkaHeaders.TOPIC, "update-merchant")
+                .build();
+        log.info("Sending message to  'update-merchant':{}", message);
+        kafkaTemplate.send(message);
+    }
+
+    public void sendDeleteMerchantMessage(MerchantDTO merchantDTO) {
+        Message<MerchantDTO> message = MessageBuilder
+                .withPayload(merchantDTO)
+                .setHeader(KafkaHeaders.TOPIC, "delete-merchant")
+                .build();
+        log.info("Sending message to  'delete-merchant':{}", message);
+        kafkaTemplate.send(message);
+    }
 }

@@ -48,4 +48,24 @@ public class FeeConsumer {
             log.error("Error processing transaction: {}", e.getMessage(), e);
         }
     }
+    @KafkaListener(topics = "update-merchant", groupId = "mygroup")
+    public void handleMerchantUpdate(MerchantDTO merchantDTO) {
+        log.info("Consuming the message from 'update-merchant' topic: {}", merchantDTO);
+
+        try {
+            feeService.updateMerchant(merchantDTO);
+        } catch (Exception e) {
+            log.error("Error updating merchant: {}", e.getMessage(), e);
+        }
+    }
+    @KafkaListener(topics = "delete-merchant", groupId = "mygroup")
+    public void handleMerchantDeletion(MerchantDTO merchantDTO) {
+        log.info("Consuming the message from 'delete-merchant' topic: {}", merchantDTO);
+
+        try {
+            feeService.deleteMerchant(merchantDTO);
+        } catch (Exception e) {
+            log.error("Error deleting merchant: {}", e.getMessage(), e);
+        }
+    }
 }

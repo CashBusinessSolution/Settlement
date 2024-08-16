@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransferDTO {
+    private Long id;
     private BigDecimal feeAmount;
     private Long merchantId;
     private String settlementOption;
