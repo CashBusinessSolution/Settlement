@@ -16,7 +16,6 @@
 	<modules>
 		<module>Fee</module>
 		<module>Transfer</module>
-		<module>Exception</module>
         <module>commonDTOS</module>
     </modules>
 	<properties>

@@ -26,28 +26,10 @@ public class FeeService {
 
     private final MerchantRepository merchantRepository;
     private final FeeRepository feeRepository;
-    private final MerchantMapper merchantMapper;
     private final FeeProducer feeProducer;
 
 
-    public Fee createFees(Fee fee) {
-        return feeRepository.save(fee);
-    }
 
-    // Récupération de tous les frais
-    public List<Fee> getAllFees() {
-        return feeRepository.findAll();
-    }
-
-    // Récupération des frais par ID
-    public Fee getFeesById(Long id) {
-        return feeRepository.findById(id).orElse(null);
-    }
-
-    // Suppression des frais par ID
-    public void deleteFees(Long id) {
-        feeRepository.deleteById(id);
-    }
 
     public BigDecimal calculateFee(BigDecimal amount, BigDecimal taxRate) {
         return amount.multiply(taxRate);

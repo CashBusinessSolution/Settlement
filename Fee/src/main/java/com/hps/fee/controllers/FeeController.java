@@ -14,26 +14,6 @@ import java.util.List;
 public class FeeController {
     private final FeeService feeService;
 
-    @PostMapping
-    public Fee createFees(@RequestBody Fee fee) {
-        return feeService.createFees(fee);
-    }
-
-    @GetMapping
-    public List<Fee> getAllFees() {
-        return feeService.getAllFees();
-    }
-
-    @GetMapping("/{id}")
-    public Fee getFeesById(@PathVariable Long id) {
-        return feeService.getFeesById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteFees(@PathVariable Long id) {
-        feeService.deleteFees(id);
-    }
-
 
     }
 
