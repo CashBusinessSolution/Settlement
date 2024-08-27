@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +20,6 @@ public class FeeDTO {
     private BigDecimal amount ;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
+    private String cdfType;
+    private LocalDate transactionDate;
 }

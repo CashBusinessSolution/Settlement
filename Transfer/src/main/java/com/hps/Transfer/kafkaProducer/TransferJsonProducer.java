@@ -60,8 +60,8 @@ public class TransferJsonProducer {
                 updatedTransfer.getTransactionId(),
                 updatedTransfer.getAmount(),
                 updatedTransfer.getBankAccountNumber(),
-                updatedTransfer.getAccountBalance()
-        );
+                updatedTransfer.getAccountBalance())
+                ;
         // Construire et envoyer le message Kafka
         Message<TransferDTO> message = MessageBuilder
                 .withPayload(updatedTransferDTO)

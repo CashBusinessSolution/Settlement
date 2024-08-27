@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
+
 @Component
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
@@ -20,5 +23,6 @@ public class MerchantDTO {
     private BigDecimal TaxRate;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
-
+    private String cdfType;
+    private LocalDate LastTransactionDate;
 }

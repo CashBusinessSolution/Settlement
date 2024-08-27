@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 
 @Data
@@ -31,4 +33,5 @@ public class Fee {
     private BigDecimal Amount ;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
+    private LocalDate transactionDate;
 }

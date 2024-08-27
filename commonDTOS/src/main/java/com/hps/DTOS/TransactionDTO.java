@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
@@ -18,5 +20,6 @@ public class TransactionDTO {
     private Long merchantId;
     private BigDecimal amount ;
     public String TypeMessage;
+    private LocalDate transactionDate;
 
 }

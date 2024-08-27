@@ -1,6 +1,8 @@
 package com.hps.fee.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,4 +22,7 @@ public class Merchant {
     private BigDecimal taxRate;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
+    private String cdfType;
+    private BigDecimal totalAmount = BigDecimal.ZERO;
+    private LocalDate LastTransactionDate;
 }

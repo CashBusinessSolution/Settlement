@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "transfer")
@@ -29,4 +30,5 @@ public class Transfer {
     private Long transactionId;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
+
 }
