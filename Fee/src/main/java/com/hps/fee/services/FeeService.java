@@ -33,10 +33,6 @@ public class FeeService {
     private static final BigDecimal BREAKPOINT_2 = new BigDecimal("5000000.00");
     private static final BigDecimal BREAKPOINT_3 = new BigDecimal("10000000.00");
 
-    private static final BigDecimal RATE_1 = new BigDecimal("0.05");
-    private static final BigDecimal RATE_2 = new BigDecimal("0.04");
-    private static final BigDecimal RATE_3 = new BigDecimal("0.03");
-    private static final BigDecimal RATE_4 = new BigDecimal("0.02");
 
     public BigDecimal calculateStandardCdf(BigDecimal amount, BigDecimal taxRate) {
         return amount.multiply(taxRate).setScale(2, RoundingMode.HALF_UP);
@@ -61,29 +57,29 @@ public class FeeService {
         }
     }
 
-    public static BigDecimal calculateTieredCdf(BigDecimal amount) {
+    public static BigDecimal calculateTieredCdf(BigDecimal amount, BigDecimal rate1, BigDecimal rate2, BigDecimal rate3, BigDecimal rate4) {
 
-        BigDecimal feeAtBreakpoint1 = BREAKPOINT_1.multiply(RATE_1).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal feeAtBreakpoint1 = BREAKPOINT_1.multiply(rate1).setScale(2, RoundingMode.HALF_UP);
 
         BigDecimal feeBetweenBreakpoints1And2 = BREAKPOINT_2.subtract(BREAKPOINT_1)
-                .multiply(RATE_2).setScale(2, RoundingMode.HALF_UP);
+                .multiply(rate2).setScale(2, RoundingMode.HALF_UP);
 
         BigDecimal feeBetweenBreakpoints2And3 = BREAKPOINT_3.subtract(BREAKPOINT_2)
-                .multiply(RATE_3).setScale(2, RoundingMode.HALF_UP);
+                .multiply(rate3).setScale(2, RoundingMode.HALF_UP);
 
         if (amount.compareTo(BREAKPOINT_1) <= 0) {
-            return amount.multiply(RATE_1).setScale(2, RoundingMode.HALF_UP);
+            return amount.multiply(rate1).setScale(2, RoundingMode.HALF_UP);
 
         } else if (amount.compareTo(BREAKPOINT_2) <= 0) {
             return feeAtBreakpoint1.add(amount.subtract(BREAKPOINT_1)
-                    .multiply(RATE_2).setScale(2, RoundingMode.HALF_UP));
+                    .multiply(rate2).setScale(2, RoundingMode.HALF_UP));
 
         } else if (amount.compareTo(BREAKPOINT_3) <= 0) {
             return feeAtBreakpoint1.add(feeBetweenBreakpoints1And2).add(amount.subtract(BREAKPOINT_2)
-                    .multiply(RATE_3).setScale(2, RoundingMode.HALF_UP));
+                    .multiply(rate3).setScale(2, RoundingMode.HALF_UP));
         } else {
             return feeAtBreakpoint1.add(feeBetweenBreakpoints1And2).add(feeBetweenBreakpoints2And3)
-                    .add(amount.subtract(BREAKPOINT_3).multiply(RATE_4).setScale(2, RoundingMode.HALF_UP));
+                    .add(amount.subtract(BREAKPOINT_3).multiply(rate4).setScale(2, RoundingMode.HALF_UP));
         }
 
     }
@@ -93,17 +89,25 @@ public class FeeService {
             Merchant merchant = merchantRepository.findById(transactionDTO.getMerchantId()).orElse(null);
 
             if (merchant != null) {
+
+
                 if (
                         ("on_drop".equals(merchant.getSettlementOption()) && "drop".equals(transactionDTO.getTypeMessage())) ||
                                 ("on_removal".equals(merchant.getSettlementOption()) && "removal".equals(transactionDTO.getTypeMessage())) ||
                                 ("on_verification".equals(merchant.getSettlementOption()) && "verification".equals(transactionDTO.getTypeMessage()))
                 ) {
                     BigDecimal taxRate = merchant.getTaxRate();
+
+                    BigDecimal rate1 = taxRate;
+                    BigDecimal rate2 = taxRate.subtract(new BigDecimal("0.01"));
+                    BigDecimal rate3 = taxRate.subtract(new BigDecimal("0.02"));
+                    BigDecimal rate4 = taxRate.subtract(new BigDecimal("0.03"));
+
                     BigDecimal amount = transactionDTO.getAmount();
                     BigDecimal feeAmount = switch (merchant.getCdfType()) {
                         case "Standard CDF" -> calculateStandardCdf(amount, taxRate);
                         case "Bulked Price" -> calculateBulkedPrice(amount, taxRate);
-                        case "Tiered CDF" -> calculateTieredCdf(amount);
+                        case "Tiered CDF" -> calculateTieredCdf(amount, rate1, rate2, rate3, rate4);
                         default -> throw new IllegalArgumentException("Unknown CDF type: " + merchant.getCdfType());
                     };
 

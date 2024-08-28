@@ -30,5 +30,5 @@ public class Transfer {
     private Long transactionId;
     private String bankAccountNumber;
     private BigDecimal accountBalance;
-
+    private LocalDate transactionDate;
 }
